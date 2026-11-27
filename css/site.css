@@ -1,0 +1,441 @@
+:root {
+  color-scheme: light;
+  --paper: #f8f8f4;
+  --ink: #000;
+  --yellow: #fff300;
+  --sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  /* Three title sizes: troupe or page name, section, item. */
+  --title-large: clamp(1.85rem, 4.2vw, 2.75rem);
+  --title-medium: 1.375rem;
+  --title-small: 1.125rem;
+  --rule: 1px solid var(--ink);
+  --heavy-rule: 4px solid var(--ink);
+  --gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1.0625rem/1.5 var(--sans);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, p, ul, ol, dl, dd {
+  margin: 0;
+}
+
+h1, h2, h3, .wordmark {
+  font-weight: 700;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  font-size: var(--title-large);
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: var(--title-medium);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--title-small);
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.shell {
+  width: min(76rem, 100% - clamp(2rem, 7vw, 6rem));
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  z-index: 1;
+  inset: 0.5rem auto auto 0.5rem;
+  padding: 0.5rem 0.75rem;
+  transform: translateY(-200%);
+  background: var(--yellow);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* Header and footer */
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.75rem 2rem;
+  padding-block: 1.25rem 0.75rem;
+  border-block-end: var(--heavy-rule);
+}
+
+.wordmark {
+  font-size: var(--title-large);
+  letter-spacing: -0.03em;
+}
+
+.wordmark a {
+  text-decoration: none;
+}
+
+.tagline {
+  margin-block-start: 0.2rem;
+  font-size: 0.9375rem;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem clamp(0.25rem, 1.5vw, 1rem);
+  margin-inline-start: -0.35rem;
+  padding: 0;
+  list-style: none;
+  font-weight: 700;
+}
+
+.main-nav a {
+  display: inline-block;
+  padding: 0.3rem 0.35rem;
+  text-decoration: none;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+}
+
+.main-nav [aria-current], .main-nav .current-section {
+  background: var(--yellow);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding-block: 1.25rem;
+  border-block-start: var(--heavy-rule);
+}
+
+.footer-mjc {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-mjc img {
+  flex: none;
+  width: 5.5rem;
+  height: auto;
+}
+
+.footer-mjc:hover {
+  background: none;
+}
+
+.footer-mjc:hover span {
+  background: var(--yellow);
+}
+
+/* Two-column pages: text on the left, complete poster on the right */
+
+.home, .show {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.home-text, .show-text {
+  padding-block: var(--gap);
+  padding-inline-end: var(--gap);
+}
+
+.home-poster, .show-poster {
+  padding-block: var(--gap);
+  padding-inline-start: var(--gap);
+  border-inline-start: var(--rule);
+}
+
+.poster {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Wide screens: the whole poster fits in the window when it is tall enough. */
+.home-poster .poster, .show-poster .poster {
+  width: clamp(22rem, (100vh - 11rem) * 848 / 1200, 36rem);
+  max-width: 44vw;
+}
+
+.home-intro {
+  max-width: 36ch;
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  line-height: 1.4;
+}
+
+.home-section {
+  margin-block-start: 1.75rem;
+  padding-block-start: 1.25rem;
+  border-block-start: var(--rule);
+}
+
+.home-section > h2 + p {
+  max-width: 48ch;
+  margin-block-start: 0.5rem;
+}
+
+.more {
+  margin-block-start: 0.75rem;
+  font-weight: 700;
+}
+
+/* Performance dates */
+
+.dates, .programme {
+  padding: 0;
+  list-style: none;
+}
+
+.dates {
+  margin-block-start: 0.75rem;
+}
+
+.dates li {
+  padding-block: 0.75rem;
+  border-block-start: var(--rule);
+}
+
+.dates li:last-child {
+  border-block-end: var(--rule);
+}
+
+.performance-date {
+  align-self: start;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+  font-size: var(--title-small);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.performance-day {
+  padding: 0.05em 0.25em;
+  background: var(--yellow);
+  box-decoration-break: clone;
+}
+
+.performance-day::first-letter {
+  text-transform: uppercase;
+}
+
+.dates p {
+  margin-block-start: 0.2rem;
+}
+
+.empty-agenda {
+  margin-block-start: 0.75rem;
+  padding-block: 1rem;
+  border-block: var(--rule);
+}
+
+.empty-agenda p {
+  margin-block-start: 0.35rem;
+}
+
+/* Rehearsal photos: whole frames, two columns on wide screens */
+
+.rehearsals {
+  padding-block: var(--gap);
+  border-block-start: var(--rule);
+}
+
+.rehearsals h2 {
+  margin-block-end: 1.25rem;
+}
+
+.rehearsal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rehearsal-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: var(--rule);
+}
+
+@media (min-width: 52rem) {
+  .rehearsal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Inner pages */
+
+.inner-page {
+  padding-block: var(--gap);
+}
+
+.page-heading {
+  margin-block-end: 1.5rem;
+}
+
+.page-heading p {
+  margin-block-start: 0.35rem;
+  font-weight: 700;
+}
+
+.inner-page > .page-heading {
+  padding-block-end: 1rem;
+  border-block-end: var(--rule);
+}
+
+.prose {
+  max-width: 62ch;
+}
+
+.prose p + p, .prose p + ul, .prose ul + p {
+  margin-block-start: 1em;
+}
+
+.prose h2 {
+  margin-block: 2.25rem 0.75rem;
+  padding-block-start: 1.25rem;
+  border-block-start: var(--rule);
+}
+
+.prose ul {
+  padding: 0;
+  list-style: none;
+}
+
+.prose h2 + ul {
+  columns: 2 16rem;
+  column-gap: var(--gap);
+}
+
+.prose li {
+  break-inside: avoid;
+  padding-block: 0.5rem;
+  border-block-end: var(--rule);
+}
+
+.credits {
+  margin-block-start: 2rem;
+  border-block-start: var(--heavy-rule);
+}
+
+.credits div {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 1rem;
+  padding-block: 0.6rem;
+  border-block-end: var(--rule);
+}
+
+.credits dt {
+  font-weight: 700;
+}
+
+.programme li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 0.75rem var(--gap);
+  padding-block: 1.25rem;
+  border-block-end: var(--rule);
+}
+
+.venue {
+  margin-block: 0.35rem 0.5rem;
+  font-weight: 700;
+}
+
+@media (max-width: 52rem) {
+  .home, .show {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+  }
+
+  .home-text, .show-text {
+    padding-inline-end: 0;
+  }
+
+  .home-poster, .show-poster {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    border-block-start: var(--rule);
+  }
+
+  .home-poster .poster, .show-poster .poster {
+    width: min(100%, 36rem);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .home-text {
+    padding-block: 1.25rem var(--gap);
+  }
+
+  .programme li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .show-poster {
+    padding-block-start: 0;
+    border-block-start: 0;
+  }
+}
+
+@media (max-width: 24rem) {
+  .main-nav {
+    gap: 0.25rem 0;
+    font-size: 0.875rem;
+  }
+}
