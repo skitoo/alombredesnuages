@@ -337,8 +337,40 @@ a:focus-visible {
   border-block-end: var(--rule);
 }
 
+.page-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-block-end: 1.5rem;
+  border: var(--rule);
+}
+
 .prose {
   max-width: 62ch;
+}
+
+/* Photo above the text on narrow screens, to its right on wide ones */
+
+@media (min-width: 52rem) {
+  .with-photo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    column-gap: var(--gap);
+    align-items: start;
+  }
+
+  .with-photo > .page-heading {
+    grid-column: 1 / -1;
+  }
+
+  .with-photo > .prose {
+    grid-area: 2 / 1;
+  }
+
+  .with-photo > .page-photo {
+    grid-area: 2 / 2;
+    margin-block-end: 0;
+  }
 }
 
 .prose p + p, .prose p + ul, .prose ul + p {
